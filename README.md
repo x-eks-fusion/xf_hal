@@ -9,6 +9,12 @@
 6. 支持对接锁，防止多任务竞争
 7. 方便添加新的外设
 
+## 开源链接
+
+[github](https://github.com/x-eks-fusion/xf_hal)
+
+[gitee](https://gitee.com/x-eks-fusion/xf_hal)
+
 ## 背景
 
 在嵌入式开发中，往往芯片不同，其sdk也不同。即使都是使用gpio去点灯，也会因为函数不同而不能通用。每个sdk都需要去熟悉，导致学习成本和代码书写成本增加。
@@ -41,6 +47,7 @@ graph TB
     style C fill:#fbf,stroke:#333,stroke-width:1px;
 ```
 
+细节结构图如下：
 ```mermaid
 graph TB
     A["dev_table[DEV_TABLE_SIZE]"] 
