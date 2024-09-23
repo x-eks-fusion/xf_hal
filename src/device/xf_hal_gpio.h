@@ -161,6 +161,18 @@ xf_err_t xf_hal_gpio_init(xf_gpio_num_t gpio_num, xf_hal_gpio_dir_t direction);
 xf_err_t xf_hal_gpio_deinit(xf_gpio_num_t gpio_num);
 
 /**
+ * @brief gpio 设置方向。
+ *
+ * @param gpio_num gpio 的序号。
+ * @param direction gpio 的方向，可以是输入，输出，开漏输出。
+ * @return xf_err_t
+ *      - XF_OK 成功设置方向
+ *      - XF_ERR_UNINIT 该 gpio 未初始化
+ *      - other 设置方向失败
+ */
+xf_err_t xf_hal_gpio_set_direction(xf_gpio_num_t gpio_num, xf_hal_gpio_dir_t direction);
+
+/**
  * @brief gpio 设置上下拉模式。
  *
  * @param gpio_num gpio 的序号。

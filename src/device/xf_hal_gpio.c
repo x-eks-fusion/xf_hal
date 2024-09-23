@@ -87,6 +87,31 @@ xf_err_t xf_hal_gpio_deinit(xf_gpio_num_t gpio_num)
     return XF_OK;
 }
 
+xf_err_t xf_hal_gpio_set_direction(xf_gpio_num_t gpio_num, xf_hal_gpio_dir_t direction)
+{
+    xf_err_t err = XF_OK;
+    UNUSED(err);
+
+    xf_hal_dev_t *dev = xf_hal_device_find(XF_HAL_GPIO_TYPE, gpio_num);
+    xf_hal_gpio_t *dev_gpio = (xf_hal_gpio_t *)dev;
+    XF_HAL_GPIO_CHECK(!dev_gpio, XF_ERR_UNINIT, "gpio is not init!");
+
+#if XF_HAL_LOCK_IS_ENABLE
+    xf_lock_lock(dev_gpio->dev.mutex);
+#endif
+
+    dev_gpio->config.direction = direction;
+
+#if XF_HAL_LOCK_IS_ENABLE
+    xf_lock_unlock(dev_gpio->dev.mutex);
+#endif
+
+    err = xf_hal_driver_ioctl(dev, XF_HAL_GPIO_CMD_DIRECTION, &dev_gpio->config);
+    XF_HAL_GPIO_CHECK(err, err, "set direction failed!");
+
+    return XF_OK;
+}
+
 xf_err_t xf_hal_gpio_set_pull(xf_gpio_num_t gpio_num, xf_hal_gpio_pull_t pull)
 {
     xf_err_t err = XF_OK;
